@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 760" role="img" aria-labelledby="t d">
+<title id="t">Accompagnement NAKRE Care</title>
+<desc id="d">Illustration d'une accompagnante et d'une personne âgée dans un univers vert chaleureux</desc>
+<defs>
+  <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#E3F4E8"/><stop offset="1" stop-color="#BFE6CC"/></linearGradient>
+  <filter id="s"><feDropShadow dx="0" dy="16" stdDeviation="20" flood-opacity=".12"/></filter>
+</defs>
+<rect width="720" height="760" rx="56" fill="url(#bg)"/>
+<circle cx="596" cy="125" r="78" fill="#F6C876" opacity=".65"/>
+<circle cx="114" cy="638" r="112" fill="#0B7A4B" opacity=".10"/>
+<path d="M90 592c110-106 214-128 311-62 84 57 138 60 229-2v166H90z" fill="#fff" opacity=".5"/>
+<!-- seated person -->
+<circle cx="422" cy="278" r="54" fill="#7C4A30"/>
+<path d="M374 271c13-53 75-74 113-28-12 5-24 6-36 2-18-6-35-2-52 11l-25 15z" fill="#2F2A28"/>
+<path d="M360 346c37-34 117-28 139 17l26 55-81 52-112-25 28-99z" fill="#F4B350"/>
+<path d="M445 465c50 2 89 29 104 82l29 104H442l-21-161 24-25z" fill="#3D5A56"/>
+<path d="M379 451l-34 126-58-14 39-153 53 41z" fill="#7C4A30"/>
+<!-- caregiver -->
+<circle cx="274" cy="232" r="56" fill="#5A3525"/>
+<path d="M222 232c0-44 20-78 56-78 36 0 61 31 59 74-20-21-43-31-69-29-19 2-35 13-46 33z" fill="#211D1B"/>
+<path d="M202 321c28-37 116-40 149 7l30 79-55 42-31-62-10 125H176l20-124-28 51-49-27 83-91z" fill="#FFFFFF"/>
+<rect x="246" y="344" width="62" height="62" rx="16" fill="#F0F8F3"/>
+<path d="M259 391v-34h9l19 25v-25h10v34h-9l-19-25v25z" fill="#0B7A4B"/>
+<path d="M330 430c42 24 80 26 113 4" fill="none" stroke="#5A3525" stroke-width="16" stroke-linecap="round"/>
+<path d="M197 509l-30 142h79l31-142zM285 509l18 142h81l-49-142z" fill="#234D40"/>
+<!-- card -->
+<g filter="url(#s)"><rect x="388" y="76" width="244" height="106" rx="24" fill="#fff"/><circle cx="432" cy="129" r="24" fill="#E4F5EA"/><path d="M421 129l8 8 15-18" fill="none" stroke="#0B7A4B" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text x="470" y="121" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#17372D">Présence fiable</text><text x="470" y="146" font-family="Arial, sans-serif" font-size="14" fill="#61756D">Au quotidien</text></g>
+</svg>
