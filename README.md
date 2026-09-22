@@ -1,12 +1,24 @@
-# NAKRE Care – site vitrine mis à jour
+# NAKRE Care — site vitrine
 
-Cette version du site intègre les affiches officielles envoyées par le client et réduit les espaces vides de la maquette initiale.
+Refonte UX/UI du site vitrine existant, en conservant l’architecture statique HTML/CSS/JS et le fonctionnement WhatsApp.
 
-## Déploiement sur Vercel
-- Importez ce dossier ou uploadez le zip.
-- Aucun build n'est nécessaire.
-- Le point d'entrée est `index.html`.
+## Architecture
 
-## Remarques
-- Les images de la galerie et du hero proviennent des fichiers fournis par le client.
-- Les balises Open Graph ont été ajoutées pour améliorer l'aperçu lors du partage du lien.
+- `index.html` — homepage
+- `recrutement/index.html` — parcours de recrutement séparé
+- `assets/styles.css` — design system et responsive
+- `assets/site.js` — menu mobile, bouton WhatsApp flottant et formulaire WhatsApp
+- `robots.txt` / `sitemap.xml` — SEO
+
+## Déploiement Vercel
+
+Aucun build n’est nécessaire. Déployer le dossier `nakre-care-site` tel quel.
+
+## Points conservés
+
+- Numéro : +237 674 134 365
+- WhatsApp
+- Facebook : NAKRE CARE
+- Zone : Yaoundé, Cameroun
+- Services confirmés : domicile, milieu hospitalier, rendez-vous/déplacements utiles
+- Processus : prise de contact, évaluation, organisation, suivi

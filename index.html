@@ -1,261 +1,345 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NAKRE Care — Assistance et accompagnement à Yaoundé</title>
-  <meta name="description" content="NAKRE Care accompagne les personnes en perte d'autonomie et leurs familles à Yaoundé : à domicile, en milieu hospitalier et lors de rendez-vous." />
-  <meta name="theme-color" content="#0B6B4A" />
-  <meta property="og:title" content="NAKRE Care — Une présence qui compte" />
-  <meta property="og:description" content="Assistance et accompagnement humain, organisé et professionnel à Yaoundé." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/og-image.png" />
-  <meta property="og:locale" content="fr_FR" />
-  <link rel="icon" href="assets/visuel-logo-cercle.png" />
-  <link rel="stylesheet" href="assets/styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NAKRE Care — Accompagnement à domicile, à l’hôpital et aux rendez-vous à Yaoundé</title>
+  <meta name="description" content="NAKRE Care accompagne à Yaoundé les personnes âgées, malades, en convalescence, vivant avec un handicap ou en perte d’autonomie, à domicile, en milieu hospitalier et lors de rendez-vous.">
+  <meta name="theme-color" content="#0b5d45">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://nakre-care.vercel.app/">
+  <link rel="icon" href="assets/logo-nakre-care.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/hero-care-clean.webp" as="image" type="image/webp" fetchpriority="high">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="NAKRE Care">
+  <meta property="og:title" content="NAKRE Care — Une présence qui compte">
+  <meta property="og:description" content="Assistance et accompagnement à Yaoundé, à domicile, en milieu hospitalier et lors de rendez-vous.">
+  <meta property="og:url" content="https://nakre-care.vercel.app/">
+  <meta property="og:image" content="https://nakre-care.vercel.app/assets/og-nakre-care.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NAKRE Care — Une présence qui compte">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="assets/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NAKRE Care",
+    "url": "https://nakre-care.vercel.app/",
+    "logo": "https://nakre-care.vercel.app/assets/logo-nakre-care.svg",
+    "telephone": "+237674134365",
+    "areaServed": {
+      "@type": "City",
+      "name": "Yaoundé"
+    },
+    "description": "Assistance et accompagnement des personnes en perte d’autonomie et de leurs familles à Yaoundé."
+  }
+  </script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container inner">
-      <a href="#accueil" class="brand" aria-label="NAKRE Care">
-        <img src="assets/visuel-logo-cercle.png" alt="Visuel logo NAKRE Care" />
-        <span>NAKRE <small>CARE</small></span>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="#accueil" aria-label="NAKRE Care, accueil">
+        <img src="assets/logo-nakre-care.svg" alt="" width="44" height="44">
+        <span class="brand-name">NAKRE CARE</span>
       </a>
-      <nav class="nav" aria-label="Navigation principale">
-        <a href="#apropos">À propos</a>
+
+      <nav class="desktop-nav" aria-label="Navigation principale">
         <a href="#services">Services</a>
-        <a href="#fonctionnement">Fonctionnement</a>
-        <a href="#recrutement">Recrutement</a>
-        <a href="#galerie">Visuels</a>
+        <a href="#fonctionnement">Comment ça marche</a>
+        <a href="#apropos">À propos</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a class="btn btn-primary" href="https://wa.me/237674134365" target="_blank" rel="noopener">WhatsApp</a>
-      <button class="nav-toggle" aria-label="Ouvrir le menu">☰</button>
+
+      <a class="button button-primary header-cta" href="#contact">Nous contacter</a>
+
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false" data-menu-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+      <nav class="container" aria-label="Navigation mobile">
+        <a href="#services">Services</a>
+        <a href="#fonctionnement">Comment ça marche</a>
+        <a href="#apropos">À propos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a class="mobile-menu-cta" href="#contact">Nous contacter</a>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero" id="accueil">
-      <div class="container hero-grid">
+  <main id="contenu">
+    <section class="hero" id="accueil" aria-labelledby="hero-title">
+      <div class="container hero-layout">
         <div class="hero-copy">
-          <span class="mini">Yaoundé • accompagnement humain</span>
-          <h1>Une présence qui compte, pour les personnes et les familles.</h1>
-          <p>NAKRE Care propose un accompagnement humain, organisé et professionnel pour les personnes âgées, malades, en convalescence ou vivant avec un handicap. Nous intervenons à domicile, en milieu hospitalier et lors de rendez-vous.</p>
+          <p class="eyebrow">Yaoundé, Cameroun</p>
+          <h1 id="hero-title">Une présence qui compte, au quotidien.</h1>
+          <p class="hero-lead">NAKRE Care accompagne les personnes âgées, malades, en convalescence, vivant avec un handicap ou en perte d’autonomie, ainsi que leurs familles.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Parlons de votre besoin</a>
-            <a class="btn btn-light" href="#services">Découvrir les services</a>
+            <a class="button button-primary" href="#contact">Parler de votre besoin</a>
+            <a class="text-link" href="#services">Découvrir nos services <span aria-hidden="true">→</span></a>
           </div>
-          <div class="badges">
-            <span class="badge">À domicile</span>
-            <span class="badge">En milieu hospitalier</span>
-            <span class="badge">Lors de rendez-vous</span>
-            <span class="badge">WhatsApp : 674 134 365</span>
-          </div>
-          <div class="quick-grid">
-            <div class="quick-card"><strong>Écouter</strong><span>Comprendre les habitudes et la situation.</span></div>
-            <div class="quick-card"><strong>Accompagner</strong><span>Soutenir avec respect et bienveillance.</span></div>
-            <div class="quick-card"><strong>Organiser</strong><span>Préparer des interventions adaptées.</span></div>
-            <div class="quick-card"><strong>Suivre</strong><span>Transmettre les informations utiles.</span></div>
-          </div>
+          <p class="hero-contact">WhatsApp / appel&nbsp;: <a href="tel:+237674134365">+237 674 134 365</a></p>
         </div>
-        <div class="hero-side">
-          <div class="frame"><img src="assets/affiche-presence-officielle.png" alt="Affiche NAKRE Care — Une présence qui compte" /></div>
-          <div class="hero-stack">
-            <div class="frame"><img src="assets/visuel-logo-cercle.png" alt="Visuel logo et identité NAKRE Care" /></div>
-            <div class="note-card"><h3>Accompagner avec humanité.</h3><p>Des personnes soutenues. Des familles sereines. Une organisation claire dès le premier contact.</p></div>
-          </div>
-        </div>
+
+        <figure class="hero-media">
+          <img src="assets/hero-care-clean.webp" width="840" height="1050" alt="Une accompagnante NAKRE Care aux côtés d’une dame âgée" fetchpriority="high">
+        </figure>
       </div>
     </section>
 
-    <section class="section" id="apropos">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="mini">À propos de NAKRE Care</span>
-            <h2>Une structure pensée pour rassurer et soulager le quotidien.</h2>
-          </div>
-          <p>Notre mission est d'apporter une présence professionnelle et bienveillante là où elle compte le plus : auprès des personnes fragilisées et des familles qui souhaitent un accompagnement clair, digne et fiable.</p>
-        </div>
-        <div class="feature-grid">
-          <div class="feature-panel">
-            <h3>Pourquoi les familles nous font confiance</h3>
-            <div class="feature-list">
-              <article class="feature-item"><h4>Dignité et bienveillance</h4><p>Chaque intervention respecte la personne, ses habitudes et son rythme.</p></article>
-              <article class="feature-item"><h4>Accompagnement personnalisé</h4><p>Le cadre d'intervention s'adapte au besoin réel et au contexte familial.</p></article>
-              <article class="feature-item"><h4>Présence rassurante</h4><p>À domicile, à l'hôpital ou pendant les déplacements utiles.</p></article>
-              <article class="feature-item"><h4>Communication simple</h4><p>Un point de contact unique pour organiser et ajuster le suivi.</p></article>
-            </div>
-          </div>
-          <div class="split-photo"><img src="assets/affiche-quotidien.png" alt="Visuel NAKRE Care — À vos côtés, au quotidien" /></div>
-        </div>
+    <div class="context-strip" aria-label="Contextes d’accompagnement">
+      <div class="container context-items">
+        <span>À domicile</span>
+        <span aria-hidden="true">•</span>
+        <span>Milieu hospitalier</span>
+        <span aria-hidden="true">•</span>
+        <span>Rendez-vous</span>
+        <span aria-hidden="true">•</span>
+        <span>Yaoundé</span>
       </div>
-    </section>
+    </div>
 
-    <section class="section alt" id="services">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="mini">Nos services</span>
-            <h2>Des interventions simples à comprendre et utiles au quotidien.</h2>
-          </div>
-          <p>Les visuels ci-dessous présentent les principaux contextes d'accompagnement de NAKRE Care. Ils sont intégrés directement dans le site pour renforcer la confiance et limiter les espaces vides.</p>
+    <section class="section audience" aria-labelledby="audience-title">
+      <div class="container two-column editorial-grid">
+        <div>
+          <p class="eyebrow">À qui s’adresse NAKRE Care&nbsp;?</p>
+          <h2 id="audience-title">Un accompagnement pensé autour de la personne et de sa famille.</h2>
         </div>
-        <div class="poster-grid">
-          <article class="poster-card">
-            <img src="assets/affiche-presence-officielle.png" alt="Affiche service principale NAKRE Care" />
-            <div class="poster-body">
-              <h3>Assistance et accompagnement</h3>
-              <p>Présence à domicile, en milieu hospitalier ou lors de rendez-vous selon le besoin.</p>
-            </div>
-          </article>
-          <article class="poster-card">
-            <img src="assets/affiche-quotidien.png" alt="Affiche NAKRE Care à vos côtés" />
-            <div class="poster-body">
-              <h3>À vos côtés, au quotidien</h3>
-              <p>Écouter, accompagner, organiser et suivre : les quatre piliers de notre méthode.</p>
-            </div>
-          </article>
-          <article class="poster-card">
-            <img src="assets/affiche-recrutement-officielle.png" alt="Affiche recrutement NAKRE Care" />
-            <div class="poster-body">
-              <h3>Rejoignez l'équipe</h3>
-              <p>Nous recrutons des auxiliaires de vie humaines, sérieuses et professionnelles à Yaoundé.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="fonctionnement">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="mini">Comment ça marche</span>
-            <h2>Un parcours clair, du premier message au suivi.</h2>
-          </div>
-          <p>Nous avons simplifié l'expérience pour que chaque famille puisse comprendre rapidement comment se met en place l'accompagnement.</p>
-        </div>
-        <div class="steps">
-          <article class="step"><div class="num">1</div><h3>Prise de contact</h3><p>Vous nous écrivez sur WhatsApp ou vous appelez pour exposer le besoin.</p></article>
-          <article class="step"><div class="num">2</div><h3>Évaluation</h3><p>Nous précisons le contexte, la fréquence, le lieu et le type d'assistance attendu.</p></article>
-          <article class="step"><div class="num">3</div><h3>Organisation</h3><p>Nous préparons l'accompagnement adapté avec une information claire pour la famille.</p></article>
-          <article class="step"><div class="num">4</div><h3>Suivi</h3><p>Nous restons disponibles pour ajuster l'intervention et transmettre les informations utiles.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt" id="recrutement">
-      <div class="container recruit-wrap">
-        <div class="split-photo"><img src="assets/affiche-recrutement-officielle.png" alt="Affiche recrutement NAKRE Care" /></div>
-        <div class="copy-card">
-          <span class="mini">Recrutement</span>
-          <h2>Rejoignez l'équipe NAKRE Care.</h2>
-          <p style="margin-top:16px">Nous recherchons des profils engagés, ponctuels et respectueux, capables d'accompagner avec professionnalisme les personnes en perte d'autonomie à Yaoundé.</p>
-          <ul>
-            <li><strong>Humanité :</strong> respecter chaque personne et son histoire.</li>
-            <li><strong>Ponctualité :</strong> être fiable au quotidien.</li>
-            <li><strong>Confidentialité :</strong> agir avec discrétion.</li>
-            <li><strong>Sens du service :</strong> accompagner avec professionnalisme.</li>
+        <div class="audience-copy">
+          <p>Nos services peuvent notamment répondre aux besoins des personnes qui rencontrent une difficulté temporaire ou durable dans leur quotidien.</p>
+          <ul class="plain-list columns-list">
+            <li>Personnes âgées</li>
+            <li>Personnes malades</li>
+            <li>Personnes en convalescence</li>
+            <li>Personnes vivant avec un handicap</li>
+            <li>Personnes en perte d’autonomie</li>
+            <li>Familles ayant besoin d’un relais</li>
           </ul>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
-            <a class="btn btn-accent" href="https://wa.me/237674134365?text=Bonjour%20NAKRE%20Care%2C%20je%20souhaite%20postuler." target="_blank" rel="noopener">Candidater sur WhatsApp</a>
-            <a class="btn btn-light" href="#contact">Poser une question</a>
-          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="galerie">
+    <section class="section services" id="services" aria-labelledby="services-title">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="mini">Visuels de la marque</span>
-            <h2>Affiches et identité visuelle NAKRE Care.</h2>
-          </div>
-          <p>Cette galerie reprend les principaux visuels que vous avez fournis, afin que le site reflète directement l'univers de votre page Facebook.</p>
+        <div class="section-heading narrow-heading">
+          <p class="eyebrow">Services</p>
+          <h2 id="services-title">Une présence adaptée aux moments où elle est nécessaire.</h2>
+          <p>Chaque accompagnement est organisé selon la situation, le lieu et les besoins définis avec la personne et sa famille.</p>
         </div>
-        <div class="gallery">
-          <figure><img src="assets/visuel-logo-cercle.png" alt="Identité visuelle NAKRE Care" /></figure>
-          <figure><img src="assets/affiche-presence-officielle.png" alt="Affiche NAKRE Care une présence qui compte" /></figure>
-          <figure><img src="assets/affiche-quotidien.png" alt="Affiche NAKRE Care à vos côtés" /></figure>
-          <figure><img src="assets/affiche-recrutement-officielle.png" alt="Affiche de recrutement NAKRE Care" /></figure>
+
+        <div class="service-list">
+          <article class="service-row">
+            <div class="service-number" aria-hidden="true">01</div>
+            <div>
+              <h3>Accompagnement à domicile</h3>
+              <p>Une présence au domicile pour accompagner la personne dans son quotidien, dans le respect de ses habitudes et de son autonomie.</p>
+            </div>
+          </article>
+          <article class="service-row">
+            <div class="service-number" aria-hidden="true">02</div>
+            <div>
+              <h3>Accompagnement en milieu hospitalier</h3>
+              <p>Une présence humaine et rassurante auprès de la personne lorsqu’elle séjourne ou se rend dans un établissement hospitalier.</p>
+            </div>
+          </article>
+          <article class="service-row">
+            <div class="service-number" aria-hidden="true">03</div>
+            <div>
+              <h3>Rendez-vous et déplacements utiles</h3>
+              <p>Un accompagnement lors de rendez-vous ou de déplacements lorsque la personne a besoin d’être soutenue et accompagnée.</p>
+            </div>
+          </article>
+        </div>
+
+        <p class="service-note">NAKRE Care présente ici des services d’accompagnement. Les actes médicaux ou réglementés relèvent uniquement des professionnels habilités.</p>
+      </div>
+    </section>
+
+    <section class="section trust" id="apropos" aria-labelledby="trust-title">
+      <div class="container trust-layout">
+        <figure class="support-media">
+          <img src="assets/daily-clean.webp" width="900" height="1100" loading="lazy" alt="Une accompagnante NAKRE Care soutenant un homme âgé lors d’un déplacement">
+        </figure>
+
+        <div class="trust-content">
+          <p class="eyebrow">Pourquoi NAKRE Care&nbsp;?</p>
+          <h2 id="trust-title">Un accompagnement organisé, respectueux et humain.</h2>
+          <p class="intro">L’objectif est simple&nbsp;: apporter un relais clair aux familles tout en respectant la dignité, les habitudes et le rythme de la personne accompagnée.</p>
+
+          <dl class="commitments">
+            <div><dt>Dignité</dt><dd>Respecter la personne dans sa manière de vivre et dans les décisions qui la concernent.</dd></div>
+            <div><dt>Bienveillance</dt><dd>Adopter une présence attentive, respectueuse et adaptée à la situation.</dd></div>
+            <div><dt>Accompagnement personnalisé</dt><dd>Définir le cadre de l’accompagnement à partir des besoins réellement exprimés.</dd></div>
+            <div><dt>Communication claire</dt><dd>Partager les informations utiles avec la famille et préciser le rôle de chacun.</dd></div>
+            <div><dt>Confidentialité</dt><dd>Traiter les informations personnelles et familiales avec discrétion.</dd></div>
+            <div><dt>Organisation</dt><dd>Préparer les interventions et ajuster le suivi lorsque la situation évolue.</dd></div>
+          </dl>
         </div>
       </div>
     </section>
 
-    <section class="section contact" id="contact">
-      <div class="container contact-wrap">
-        <div class="contact-card">
-          <span class="mini">Contact</span>
-          <h2>Parlons de votre besoin.</h2>
-          <p style="margin-top:16px">Le plus simple est de nous écrire sur WhatsApp. Vous pouvez aussi utiliser le formulaire ci-contre : il prépare automatiquement le message à envoyer.</p>
-          <div class="contact-list">
-            <div class="contact-item"><div class="contact-icon">☎</div><div><strong>Téléphone / WhatsApp</strong><br><a href="tel:+237674134365">+237 674 134 365</a></div></div>
-            <div class="contact-item"><div class="contact-icon">f</div><div><strong>Facebook</strong><br>NAKRE CARE</div></div>
-            <div class="contact-item"><div class="contact-icon">⌖</div><div><strong>Zone de service</strong><br>Yaoundé, Cameroun</div></div>
+    <section class="section process" id="fonctionnement" aria-labelledby="process-title">
+      <div class="container process-layout">
+        <div class="process-heading">
+          <p class="eyebrow">Comment ça marche</p>
+          <h2 id="process-title">Quatre étapes pour organiser l’accompagnement.</h2>
+          <p>Vous gardez un cadre simple et compréhensible, du premier échange jusqu’au suivi.</p>
+        </div>
+
+        <ol class="timeline">
+          <li>
+            <span class="timeline-number">1</span>
+            <div><h3>Prise de contact</h3><p>Vous présentez votre besoin par téléphone ou WhatsApp.</p></div>
+          </li>
+          <li>
+            <span class="timeline-number">2</span>
+            <div><h3>Évaluation</h3><p>Nous précisons la situation, le lieu, la fréquence et les attentes.</p></div>
+          </li>
+          <li>
+            <span class="timeline-number">3</span>
+            <div><h3>Organisation</h3><p>Le cadre de l’accompagnement est défini de manière claire avec la famille.</p></div>
+          </li>
+          <li>
+            <span class="timeline-number">4</span>
+            <div><h3>Suivi</h3><p>Les informations utiles sont transmises et l’organisation peut être ajustée si nécessaire.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <div class="faq-heading">
+          <p class="eyebrow">Questions fréquentes</p>
+          <h2 id="faq-title">Les réponses essentielles avant de nous contacter.</h2>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>À qui s’adressent les services de NAKRE Care&nbsp;?</summary>
+            <p>Ils peuvent concerner les personnes âgées, malades, en convalescence, vivant avec un handicap ou en perte d’autonomie, ainsi que leurs familles.</p>
+          </details>
+          <details>
+            <summary>Dans quels contextes intervenez-vous&nbsp;?</summary>
+            <p>NAKRE Care propose un accompagnement à domicile, en milieu hospitalier et lors de rendez-vous ou déplacements utiles, selon l’organisation définie avec la famille.</p>
+          </details>
+          <details>
+            <summary>Comment se met en place un accompagnement&nbsp;?</summary>
+            <p>Le premier échange permet de préciser le besoin, puis d’organiser le cadre de l’intervention et le suivi.</p>
+          </details>
+          <details>
+            <summary>NAKRE Care réalise-t-il des actes médicaux&nbsp;?</summary>
+            <p>Les actes médicaux ou réglementés ne sont pas présentés comme des prestations de NAKRE Care et relèvent des professionnels habilités.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div class="contact-intro">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title">Parlons simplement de votre besoin.</h2>
+          <p>Pour un premier échange, WhatsApp est le moyen le plus direct. Vous pouvez aussi appeler ou préparer votre message avec le formulaire.</p>
+
+          <div class="contact-priority">
+            <a class="button button-primary" href="https://wa.me/237674134365?text=Bonjour%20NAKRE%20Care%2C%20je%20souhaite%20vous%20pr%C3%A9senter%20mon%20besoin." target="_blank" rel="noopener noreferrer">Écrire sur WhatsApp</a>
+            <a class="phone-link" href="tel:+237674134365">Appeler le +237 674 134 365</a>
           </div>
-          <div class="faq">
-            <details><summary>À qui s'adresse NAKRE Care ?</summary><p>Aux personnes âgées, malades, en convalescence ou vivant avec un handicap, ainsi qu'aux familles qui recherchent un accompagnement structuré.</p></details>
-            <details><summary>Où intervenez-vous ?</summary><p>À domicile, en milieu hospitalier et lors de rendez-vous ou déplacements utiles, selon l'organisation définie avec la famille.</p></details>
-            <details><summary>Comment obtenir des informations ?</summary><p>Écrivez simplement sur WhatsApp au 674 134 365 pour présenter brièvement votre situation.</p></details>
+
+          <div class="contact-meta">
+            <p><strong>Zone de service</strong><br>Yaoundé, Cameroun</p>
+            <p><strong>Facebook</strong><br>NAKRE CARE</p>
           </div>
         </div>
-        <form id="contactForm" class="contact-card">
-          <div class="form-grid">
-            <div class="field"><label for="name">Nom</label><input id="name" name="name" placeholder="Votre nom" /></div>
-            <div class="field"><label for="phone">Téléphone</label><input id="phone" name="phone" placeholder="6xx xxx xxx" /></div>
-            <div class="field"><label for="need">Type de besoin</label><select id="need" name="need"><option>Assistance à domicile</option><option>Accompagnement à l'hôpital</option><option>Accompagnement lors de rendez-vous</option><option>Relais pour la famille</option><option>Recrutement</option></select></div>
-            <div class="field"><label for="timing">Quand ?</label><select id="timing" name="timing"><option>Dès que possible</option><option>Cette semaine</option><option>Ce mois-ci</option><option>Je me renseigne</option></select></div>
-            <div class="field full"><label for="message">Votre message</label><textarea id="message" name="message" placeholder="Décrivez la situation ou votre question."></textarea></div>
-            <div class="field full"><button type="submit" class="btn btn-primary">Envoyer sur WhatsApp</button><div class="notice">Le site est statique : aucune donnée n'est stockée sur le site. Le formulaire ouvre seulement WhatsApp.</div></div>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Nom</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="phone">Téléphone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="6xx xxx xxx" required>
+            </div>
           </div>
+
+          <div class="field">
+            <label for="need">Votre besoin</label>
+            <select id="need" name="need" required>
+              <option value="">Sélectionner</option>
+              <option>Accompagnement à domicile</option>
+              <option>Accompagnement en milieu hospitalier</option>
+              <option>Rendez-vous ou déplacement utile</option>
+              <option>Je souhaite d’abord me renseigner</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Quelques mots sur la situation</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <p class="form-help">En continuant, votre demande s’ouvrira dans WhatsApp. Les informations saisies dans ce formulaire ne sont pas enregistrées sur ce site.</p>
+          <p class="form-error" role="alert" data-form-error hidden>Merci de compléter les champs obligatoires avant de continuer.</p>
+          <button class="button button-primary" type="submit">Continuer dans WhatsApp</button>
         </form>
       </div>
     </section>
 
-    <section class="cta">
-      <div class="container cta-inner">
+    <section class="recruitment-brief" id="recrutement" aria-labelledby="recruit-title">
+      <div class="container recruitment-inner">
         <div>
-          <h2>NAKRE Care — Une présence qui compte.</h2>
-          <p>Besoin d'aide, d'information ou envie de rejoindre l'équipe ? Écrivez-nous sur WhatsApp et nous reviendrons vers vous rapidement.</p>
+          <p class="eyebrow">Recrutement</p>
+          <h2 id="recruit-title">Vous souhaitez rejoindre NAKRE Care&nbsp;?</h2>
+          <p>Découvrez le profil recherché et le processus de candidature.</p>
         </div>
-        <a class="btn btn-light" href="https://wa.me/237674134365?text=Bonjour%20NAKRE%20Care" target="_blank" rel="noopener">Contacter NAKRE Care</a>
+        <a class="text-link strong-link" href="recrutement/">Voir les informations de recrutement <span aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <a href="#accueil" class="brand"><img src="assets/visuel-logo-cercle.png" alt="NAKRE Care" /><span>NAKRE <small>CARE</small></span></a>
-          <p style="margin-top:14px">Assistance et accompagnement professionnel à Yaoundé pour les personnes en perte d'autonomie et leurs familles.</p>
-        </div>
-        <div>
-          <h4>Navigation</h4>
-          <div class="footer-links">
-            <a href="#apropos">À propos</a>
-            <a href="#services">Services</a>
-            <a href="#fonctionnement">Fonctionnement</a>
-            <a href="#recrutement">Recrutement</a>
-          </div>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <div class="footer-links">
-            <a href="tel:+237674134365">+237 674 134 365</a>
-            <a href="https://wa.me/237674134365" target="_blank" rel="noopener">WhatsApp</a>
-            <span>Facebook : NAKRE CARE</span>
-            <span>Yaoundé, Cameroun</span>
-          </div>
-        </div>
+  <footer class="site-footer" data-footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand brand-footer" href="#accueil" aria-label="NAKRE Care, retour en haut">
+          <img src="assets/logo-nakre-care.svg" alt="" width="40" height="40" loading="lazy">
+          <span class="brand-name">NAKRE CARE</span>
+        </a>
+        <p>Assistance et accompagnement à Yaoundé pour les personnes en perte d’autonomie et leurs familles.</p>
       </div>
-      <div class="copyline">© <span id="year"></span> NAKRE Care. Tous droits réservés.</div>
+      <nav class="footer-nav" aria-label="Navigation de pied de page">
+        <a href="#services">Services</a>
+        <a href="#fonctionnement">Comment ça marche</a>
+        <a href="#apropos">À propos</a>
+        <a href="#faq">FAQ</a>
+        <a href="recrutement/">Recrutement</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="tel:+237674134365">+237 674 134 365</a>
+        <a href="https://wa.me/237674134365" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <span>Facebook&nbsp;: NAKRE CARE</span>
+        <span>Yaoundé, Cameroun</span>
+      </div>
     </div>
+    <div class="container footer-bottom">© <span id="year"></span> NAKRE Care. Tous droits réservés.</div>
   </footer>
 
-  <a class="wa-float" href="https://wa.me/237674134365" target="_blank" rel="noopener" aria-label="Ouvrir WhatsApp">WA</a>
-  <script src="assets/site.js"></script>
+  <a class="whatsapp-float" data-whatsapp-float href="https://wa.me/237674134365?text=Bonjour%20NAKRE%20Care" target="_blank" rel="noopener noreferrer" aria-label="Contacter NAKRE Care sur WhatsApp">
+    <span aria-hidden="true">WA</span>
+  </a>
+
+  <script src="assets/site.js" defer></script>
 </body>
 </html>

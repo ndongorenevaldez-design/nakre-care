@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nakre-care.vercel.app/sitemap.xml
