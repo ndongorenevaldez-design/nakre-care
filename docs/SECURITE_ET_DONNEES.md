@@ -1,91 +1,52 @@
-# Sécurité, données et conditions d’activation
+# NAKRE CARE — Sécurité et données sensibles (Django / Railway)
 
-Cadrage du 1 novembre 2026. Ce document distingue exigences proposées, risques observés et vérifications à obtenir ; il ne constitue ni un avis juridique ni une attestation de conformité. La mission actuelle produit seulement de la documentation.
+Version de cadrage du 1 novembre 2026. Ce plan **ne constitue ni preuve de conformité ni sécurité déjà implémentée**. Voir [architecture](ARCHITECTURE_CIBLE.md) et [cahier des charges](CAHIER_DES_CHARGES.md).
 
-## 1. Risques et priorités
+## 1. Responsabilités et hébergement
 
-| Priorité | Risque | Réponse minimale avant activation |
-| --- | --- | --- |
-| Critique | Lecture/écriture de données patient par anon, compte sans MFA ou rôle inadapté | Contrôles serveur + RLS testés en accès direct ; aucun écran ou secret côté navigateur utilisé comme protection. |
-| Haute, existante | Texte libre de situation et coordonnées transportés dans `wa.me?text=` | Conserver le contact générique, retirer ultérieurement le contenu sensible de l’URL et proposer un parcours sécurisé après validation. Informer dès le cadrage de ce flux externe. |
-| Haute, existante | Formulaire sans method/action : repli GET sans JavaScript | Ne pas soumettre les réponses dans l’URL ; future soumission POST serveur ou repli explicite non collectant. |
-| Haute | Hébergement/transferts et santé non qualifiés juridiquement | Autorisation juridique et technique écrite avant collecte réelle, y compris test utilisateur avec personnes réelles. |
-| Haute | Clé service Supabase ou secret notification exposé | Secrets uniquement dans environnement serveur ; rotation, séparation des projets et examen des bundles/logs. Clé service contourne RLS. |
-| Haute | Abus d’API publique et saturation des notifications | Quotas atomiques durables, challenge serveur si nécessaire, limites de taille/coût et file plafonnée ; pas de compteur en mémoire de Function. |
-| Haute | Fuite par cache, logs, erreurs, monitoring et sauvegardes | no-store, redaction, logs sans corps de requête, accès sauvegardes restreint et rétention documentée. |
-| Haute | Compte admin compromis ou oublié | MFA AAL2, comptes individuels, scopes, révocation, récupération contrôlée, durée de session bornée et audit. |
-| Moyenne | Notification prétendue livrée ou doublonnée | Outbox transactionnelle et états fournisseur honnêtes, idempotence, retries plafonnés, déduplication webhooks. |
-| Moyenne, existante | Menu absent sur recrutement mobile ; flottant mal synchronisé | Correction séparée avec tests de non-régression. |
+Railway fournit l'infrastructure de déploiement Django et PostgreSQL privé ; NAKRE CARE reste responsable des accès, paramètres Django, droits métier, sauvegardes et restauration, conservation, incidents et obligations légales. Domaine de service `*.up.railway.app` fourni sans achat de domaine, mais service web et base consomment des ressources facturables selon le plan/crédit ; aucune disponibilité 24/7 gratuite n'est présumée.
 
-L’absence de backend actuel réduit la surface serveur mais n’annule pas le risque des informations déjà saisies et transmises à WhatsApp. Les données de santé peuvent être déduites du contexte d’accompagnement, même sans diagnostic explicite.
+Les données de santé potentielles, la dépendance et la géolocalisation requièrent minimisation et analyse des risques renforcée. Vérifier juridiquement la loi camerounaise **n° 2024/017 du 23 décembre 2024**, ses formalités, transferts éventuels hors Cameroun, sous-traitants, consentement/autorité du déclarant et droits du patient avant d'activer le formulaire en production. Ne pas présenter un simple checkbox comme justification juridique universelle. Valider régions Railway et éventuels services tiers (e-mail, WhatsApp, anti-spam, monitoring) avec un professionnel local compétent.
 
-## 2. Modèle d’accès et MFA
+## 2. Contrôles Django indispensables
 
-- Inscriptions publiques désactivées ; invitations administratives nominatives, validation de l’adresse et de la personne. Bootstrap du superadministrateur hors interface publique avec procédure documentée. Aucune identité de test partagée en production.
-- Toutes les opérations métier exigent un JWT vérifié (signature via mécanisme officiel/JWKS, issuer, audience, expiration), AAL2, membership active et permission actuelle. Ne pas se contenter de décoder le token ou d’un garde frontend. Ne pas croire un rôle envoyé par le client ou modifiable dans user_metadata.
-- MFA : inscription/challenge TOTP, écran d’enrôlement isolé ne donnant aucun accès métier en AAL1. Ne pas journaliser secret TOTP/QR/code. Perte de facteur : procédure contrôlée, preuve d’identité, révocation des sessions, audit et notification minimale. Réauthentification pour rôles, export et récupération.
-- Cookies Secure/HttpOnly/SameSite, rotation et logout révoquant côté serveur ; durée d’inactivité et durée absolue à valider. Origine vérifiée, protection CSRF pour mutations authentifiées, CORS limité aux origines connues ; pas de CORS universel avec credentials.
-- Chaque table exposable a RLS activée et politiques explicites. Tester SELECT/INSERT/UPDATE/DELETE, WITH CHECK, champs immuables et chemins RPC. anon n’a aucune lecture des tables métier. L’ingestion serveur utilise un chemin restreint sans permettre de statut, rôle, auteur ou identifiant choisis par le client.
-- Les requêtes admin utilisent l’identité utilisateur ; membership/affectation et AAL2 sont contrôlés en DB aussi. Permissions de gestion des membres non autoattribuables. Fonctions SECURITY DEFINER rares, search_path fixé, EXECUTE limité, validations explicites ; audit des risques de bypass de RLS par propriétaire/service_role/vues.
-- L’audit est append-only pour les rôles applicatifs. Une garantie contre un administrateur de base requiert un stockage séparé/inaltérable et des contrôles d’exploitation ; ne pas présenter une simple table comme inviolable.
+- Django maintenu à jour (branche LTS compatible), `DEBUG=False`, `SECRET_KEY` hors Git, `ALLOWED_HOSTS` strict pour le domaine Railway réellement attribué ; `CSRF_TRUSTED_ORIGINS` seulement pour origines nécessaires.
+- HTTPS effectivement actif, cookies de session et CSRF correctement sécurisés, `HttpOnly` pour session, SameSite, HSTS après qualification, politique proxy et en-têtes vérifiés derrière Railway.
+- CSRF pour les formulaires authentifiés et anonymes, protection XSS via échappement des templates, pas de `mark_safe` pour texte libre ; SQL via ORM/paramètres.
+- Protection de force brute / verrouillage contrôlé, limitation de débit distribuée pour envoi et connexion, validation serveur exhaustive, cap de taille, anti-bot proportionné et vérifié serveur.
+- Comptes administrateurs **nominatifs sur invitation**, sans signup public, mot de passe robuste + MFA. L'accès Django Admin natif ne prouve pas le MFA : intégrer et tester explicitement le second facteur sur toutes les routes administratives ; prévoir récupération sécurisée et révocation immédiate.
+- Autorisation par rôle **et** par dossier/affectation côté serveur, y compris liste, détails, transitions et exports. Les noms de route et menus masqués ne sont pas une protection.
+- Éviter de mettre données sensibles dans la session, URL, cache, notifications, logs, systèmes d'erreurs ou historiques JS. Réponses privées avec Cache-Control no-store et protections contre indexation, sans confondre noindex et contrôle d'accès.
+- Séparer production et développement/test avec données synthétiques ; secrets par environnement, rotation et revues de dépendances ; CI pour tests de permissions et scans de secrets.
 
-## 3. Validation et anti-abus
+## 3. Fiche publique et GPS
 
-Validation indépendante côté serveur : types, listes autorisées, longueurs, téléphone, e-mail, dates, coordonnées GPS dans les plages valides et cohérence du lieu. Corps JSON limité (proposition 16 Kio), refus de multipart/base64/fichiers, rejet des champs inattendus. Requêtes SQL paramétrées ; affichage texte échappé, jamais innerHTML de contenu libre. Erreurs publiques génériques avec identifiant technique sans contenu patient. Limiter aussi les réponses, filtres, pagination et tris admin.
+POST Django uniquement, jeton CSRF, protection anti-automatisation, idempotence, transaction, validation des longueurs/types/échelles et messages d'erreur minimaux. Aucun GET contenant une réponse de santé. Aucun téléversement de document. La géolocalisation n'est sollicitée qu'après un geste explicite : consentement navigateur, possibilité de refuser et de supprimer ; confirmer qu'il s'agit du lieu **d'intervention**, qui peut différer de la position actuelle du demandeur.
 
-Rate limiting distribué/atomique par clés minimisées (par exemple IP pseudonymisée et fenêtre temporelle), plafond global et protections login/récupération. Tenir compte des réseaux partagés : seuils à tester, pas de blocage fondé uniquement sur l’IP. Challenge anti-robot vérifié serveur, honeypot accessible correctement, quotas d’envoi et idempotence bornée. Ces prestataires ajoutent des flux de données à analyser. Une vérification Origin seule ne protège pas une API anonyme contre un bot.
+Une personne remplissant la fiche pour un proche doit indiquer son lien et la légitimité de la transmission ; vérifier la capacité/autorité et les modalités de contact avant partage. Ne pas collecter automatiquement davantage de données que nécessaire au triage.
 
-## 4. Inventaire et minimisation
+## 4. Conception des données
 
-| Données | Usage / accès | Mesure de réduction |
-| --- | --- | --- |
-| Coordonnées demandeur/bénéficiaire | Traitement de la demande, équipe habilitée | Seulement contacts utiles ; aucun identifiant national ni date de naissance complète par défaut. |
-| Besoin et contexte | Organisation de l’aide, admins affectés | Catégories et texte court optionnel, pas de dossier clinique, ordonnance ou document. |
-| Adresse/GPS | Intervention | Position facultative et révocable ; ne pas inclure dans notifications, cartes tierces ou logs. |
-| Contacts autorisés | Communication limitée | Vérifier identité, relation, finalités, dates et périmètre ; ne pas déduire l’autorisation d’un lien familial déclaré. |
-| Prestations | Continuité et responsabilité | Compte rendu factuel minimal, auteurs et corrections traçables, pas de notes médicales extensibles. |
-| Auth/audit/anti-abus | Accès et sécurité | Sans mots de passe, codes MFA, corps des demandes ou copie des notes. IP brute évitée ou rétention courte justifiée. |
-| Notifications | Alerte opérationnelle | Texte générique et destinataire autorisé, pas de nom patient, santé, lieu ou lien public de dossier. |
+CareRequest → PatientCase uniquement après acceptation ; contacts réellement autorisés distingués des contacts proposés. Traces des consentements et notices versionnées. Transactions et contraintes d'unicité contre conversion en double. Historique d'intervention factuel avec corrections tracées. Références publiques non prédictibles et jamais utilisées seules pour authentifier un lecteur.
 
-Registre des finalités, responsables, bases légales, destinataires/sous-traitants, régions, durées et moyens d’exercice des droits à produire avant lancement. Référence aléatoire ne suffit pas à anonymiser les données. Aucun analytics, replay de session, stockage local persistant ou outil d’IA appliqué aux formulaires/dossiers sans analyse et autorisation séparées.
+Journal d'audit minimal : auteur, action, ID interne, horodatage, résultat ; aucune copie du nom, diagnostic, téléphone, GPS, note libre. Notifications : destinataires habilités et texte générique seulement ; secret des webhooks, vérification signature et anti-rejeu selon fournisseur.
 
-## 5. Loi camerounaise n° 2024/017 : analyse préalable requise
+## 5. Conservation, sauvegardes, incidents
 
-La loi n° 2024/017 du 23 décembre 2024 relative à la protection des données à caractère personnel constitue le texte de référence à faire vérifier pour ce service camerounais. Le texte officiel consolidé, les textes d’application, l’autorité compétente, les formalités et le régime transitoire applicables au lancement n’ont pas pu être vérifiés en ligne dans cette session. Aucun numéro d’article, délai légal, exemption ou autorisation acquise n’est affirmé ici.
+Établir avec conseil compétent un registre des traitements : finalité, base juridique, responsables, droits d'accès, destinataires, régions, sous-traitants, durée de conservation, effacement et transferts. Hypothèses de travail seulement (pas délais légaux affirmés) : purger rapidement les demandes refusées/abandonnées après durée justifiée ; GPS dès qu'inutile ; éviter conservation indéfinie des logs, notifications et dossiers. Respecter les exceptions légales et la traçabilité.
 
-La présence de données de personnes vulnérables, potentiellement de santé, et de positions précises exige une qualification renforcée. Le consentement du demandeur ne prouve pas celui du patient ; il faut déterminer les conditions de représentation, d’information du bénéficiaire, de capacité et, le cas échéant, le cas des mineurs. Un consentement générique n’autorise pas toutes les finalités et tous les transferts.
+Planifier des **sauvegardes PostgreSQL** chiffrées, rétention, contrôle des accès, restauration testée et suppression propagée aux copies selon politique. Ne pas considérer la simple présence de PostgreSQL Railway comme une sauvegarde complète ; vérifier les capacités et conditions du plan. Définir objectifs RPO/RTO en fonction du budget et des risques, puis effectuer au moins un exercice de restauration synthétique avant ouverture.
 
-| Question à faire trancher par conseil compétent au Cameroun | Livrable attendu / conséquence |
-| --- | --- |
-| Qualification des données et bases légales par finalité | Matrice signée : demandes, dossiers, suivi, contacts, sécurité, notifications ; nécessité/proportionnalité et régime spécifique santé. |
-| Identité et responsabilités | Responsable du traitement NAKRE CARE, contacts, sous-traitants, obligations contractuelles, responsable interne et éventuel délégué selon critères applicables. |
-| Formalités préalables | Vérification des déclarations/autorisations requises pour données sensibles, géolocalisation et transferts ; obtenir les actes nécessaires avant activation. |
-| Hébergement hors Cameroun | Cartographier Vercel, région Supabase, Auth, sauvegardes, logs, support, e-mail, Meta/BSP et anti-spam ; bases/mécanismes et éventuelles autorisations de transfert. Choisir une région européenne n’établit pas à elle seule la conformité au droit camerounais. |
-| Information, consentement et droits | Notice française accessible, preuves versionnées, gestion des tiers, accès/rectification/opposition/retrait/effacement selon règles applicables, exceptions et délais validés. |
-| Conservation et obligations sectorielles | Calendrier justifié, obligations de preuve/prestation et éventuelles restrictions santé ; suppression sélective et sauvegardes incluses. |
-| Analyse d’impact, incidents et gouvernance | Déterminer les obligations applicables, documenter risques résiduels, destinataires et délais de notification des violations ; procédure de crise et validation. |
-| Entrée en vigueur et transition | Date de pleine applicabilité et mesures requises confirmées à la date de mise en service, sans supposer une période de grâce. |
+Prévoir contrôles de santé de Django, alertes pour erreurs 5xx/DB indisponible, limites de crédit/coût, sécurité MFA, saturation des jobs. Procédure d'incident : isoler application si nécessaire, limiter accès, préserver preuves minimisées, évaluer impact, informer les responsables et respecter obligations confirmées. Aucun envoi de données de patients vers des services de télémétrie non approuvés.
 
-Le site reste vitrine tant que ces points bloquants ne sont pas tranchés. Une future politique de confidentialité doit décrire le fonctionnement réellement retenu ; ne pas publier de promesse de conformité ou d’hébergement local non prouvée. Les données déjà échangées via WhatsApp doivent aussi entrer dans l’inventaire métier et les consignes internes.
+## 6. Déploiement Railway
 
-## 6. Conservation, suppression et sauvegardes
+Service Django avec build/install dépendances verrouillées, migrations contrôlées avant activation et collectstatic ; Gunicorn ou serveur équivalent conforme ; port `$PORT` ; healthcheck documenté. PostgreSQL attaché sur réseau privé, accès internet désactivé sauf raison documentée. `DATABASE_URL`, secrets et tokens dans variables Railway (jamais Git). Domaine Railway généré depuis le tableau de bord et exact hôte ajouté à Django. Paramétrer HTTPS/proxy uniquement après vérification du comportement réel.
 
-Politique à valider juridiquement avant toute application automatique. Hypothèses de travail uniquement : demandes abandonnées/refusées 90 jours après clôture ; GPS effacé dès qu’il n’est plus utile à l’intervention ; historique notifications 90 jours ; logs techniques 30 jours ; audit de sécurité 12 mois. La durée des dossiers/prestations doit être fixée selon obligations métier et légales ; pas de conservation infinie « par défaut ». Ces durées ne sont pas des durées imposées par la loi citée.
+Prévoir mise en veille / épuisement du crédit : le domaine gratuit ne garantit pas le calcul gratuit. Préproduction et production distinctes si ressources suffisantes ; aucune donnée réelle en preview. Ne pas fermer Vercel tant que Railway n'est pas validé et financé durablement.
 
-Définir déclencheur, responsable, exceptions de litige, purge des relations/outbox et preuve minimale de suppression sans recopier les données supprimées. Une suppression de compte Auth ne supprime pas automatiquement un dossier. Vérifier l’identité lors des demandes de droits, y compris celles d’un tiers ; ne pas divulguer l’existence d’un dossier à une personne non autorisée. Prévoir registre des demandes et notification aux sous-traitants lorsque nécessaire.
+## 7. Vérifications bloquantes avant collecte réelle
 
-Sauvegardes chiffrées, accès séparé, rétention et localisation documentées, restauration testée sur environnement isolé et nettoyé. Cibles proposées RPO ≤24 h et RTO ≤8 h à chiffrer/valider ; choisir PITR si nécessaire et financé. Prévoir comment rejouer les suppressions après restauration et l’expiration des copies. Ni réplication ni promesse commerciale de backup ne remplacent un essai de restauration. Ne jamais copier les données de production vers une preview.
+MFA réellement imposé partout ; matrice de permissions et tentatives d'accès non autorisées ; CSRF et validation ; journalisation saine ; tests mobile et refus GPS ; test de sauvegarde/restauration ; budget et monitoring ; documentation du traitement des données et décision juridique. Tout échec bloque l'activation du formulaire sensible.
 
-## 7. Déploiement, secrets et exploitation
-
-Secrets dans variables serveur par environnement : credentials DB/ingestion, credentials notification, signatures webhooks, secret d’ordonnanceur et anti-spam. Clé publique Supabase/Auth seulement si nécessaire au design retenu et sûre avec RLS ; aucune clé service dans un asset, HTML, variable exposée au build ou Git. Rotation et procédure d’urgence ; scans du diff, de l’historique et des bundles avant lancement. Ne pas collecter de secret pendant l’audit documentaire.
-
-Configurer HTTPS, HSTS après vérification du domaine, nosniff, Referrer-Policy restrictive, CSP adaptée (JSON-LD et styles inline actuels à traiter par hashes/nonces ou externalisation ciblée, sans unsafe-inline généralisé), frame-ancestors et Permissions-Policy pour géolocalisation limitée à self. Vérifier les headers effectivement servis, pas seulement le fichier de configuration. no-store pour auth/API/admin/confirmation et absence de mise en cache CDN des données ; noindex admin sans croire que cela sécurise l’accès.
-
-Projets et identités distincts pour dev/préproduction/production. Protections de branche main, PR, revue, migrations réversibles ou correctives documentées, approbation de production. Préviews protégées, données synthétiques, notifications de capture désactivées pour l’extérieur. Alertes sur 5xx, ingestion, file en retard, MFA/login anormaux, quota/coût et sauvegarde manquante. Ne pas envoyer de détails sensibles à l’outil de monitoring.
-
-Incident : arrêter la collecte si nécessaire, limiter l’accès, révoquer/rotater, préserver des preuves minimisées, qualifier l’impact, informer les responsables et appliquer les délais légaux confirmés. Procédure et exercice avant lancement.
-
-## 8. Sources à vérifier avant décision
-
-Sources officielles de référence, non consultées en ligne dans cette session : portail de la Présidence du Cameroun <https://www.prc.cm/> (obtenir la loi n° 2024/017 et textes associés) ; Supabase RLS <https://supabase.com/docs/guides/database/postgres/row-level-security>, MFA <https://supabase.com/docs/guides/auth/auth-mfa>, sauvegardes <https://supabase.com/docs/guides/platform/backups> ; Vercel Functions <https://vercel.com/docs/functions>, pricing <https://vercel.com/pricing> ; Supabase pricing <https://supabase.com/pricing> ; WhatsApp Business Platform <https://developers.facebook.com/docs/whatsapp/>. Valider la version, les contrats et les capacités réelles du plan choisi. Ne pas utiliser ces liens comme preuve que les formalités ou fonctionnalités sont déjà satisfaites.
+Références officielles : https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/ ; https://docs.railway.com/networking/domains/working-with-domains ; https://docs.railway.com/pricing/plans .
