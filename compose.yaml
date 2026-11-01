@@ -1,0 +1,19 @@
+# Local development only. Never use this database role/password in production.
+services:
+  db:
+    image: postgres:17-bookworm@sha256:839fbb5a4942a7758dd93e18b42ea5649807491a0545b5eeeb8f0b8bb11857a5
+    environment:
+      POSTGRES_USER: nakre_local
+      POSTGRES_DB: nakre_local
+      POSTGRES_PASSWORD: ${NAKRE_LOCAL_DB_PASSWORD:?Run python scripts/dev.py init}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - nakre_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nakre_local -d nakre_local"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  nakre_pgdata:

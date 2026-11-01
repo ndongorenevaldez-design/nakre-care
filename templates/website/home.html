@@ -1,0 +1,244 @@
+{% extends 'base.html' %}{% load static %}{% block head %}
+  <title>NAKRE Care — Accompagnement à domicile, à l’hôpital et aux rendez-vous à Yaoundé</title>
+  <meta name="description" content="NAKRE Care accompagne à Yaoundé les personnes âgées, malades, en convalescence, vivant avec un handicap ou en perte d’autonomie, à domicile, en milieu hospitalier et lors de rendez-vous.">
+  <meta name="theme-color" content="#0b5d45">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="{{ public_origin }}/">
+  <link rel="icon" href="{% static 'assets/logo-nakre-care.svg' %}" type="image/svg+xml">
+  <link rel="preload" href="{% static 'assets/hero-care-clean.webp' %}" as="image" type="image/webp" fetchpriority="high">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="NAKRE Care">
+  <meta property="og:title" content="NAKRE Care — Une présence qui compte">
+  <meta property="og:description" content="Assistance et accompagnement à Yaoundé, à domicile, en milieu hospitalier et lors de rendez-vous.">
+  <meta property="og:url" content="{{ public_origin }}/">
+  <meta property="og:image" content="{{ public_origin }}{% static 'assets/og-nakre-care.jpg' %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NAKRE Care — Une présence qui compte">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="{% static 'assets/styles.css' %}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NAKRE Care",
+    "url": "{{ public_origin }}/",
+    "logo": "{{ public_origin }}{% static 'assets/logo-nakre-care.svg' %}",
+    "telephone": "+237674134365",
+    "areaServed": {
+      "@type": "City",
+      "name": "Yaoundé"
+    },
+    "description": "Assistance et accompagnement des personnes en perte d’autonomie et de leurs familles à Yaoundé."
+  }
+  </script>
+{% endblock %}{% block content %}  <main id="contenu">
+    <section class="hero" id="accueil" aria-labelledby="hero-title">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Yaoundé, Cameroun</p>
+          <h1 id="hero-title">Une présence qui compte, au quotidien.</h1>
+          <p class="hero-lead">NAKRE Care accompagne les personnes âgées, malades, en convalescence, vivant avec un handicap ou en perte d’autonomie, ainsi que leurs familles.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">Parler de votre besoin</a>
+            <a class="text-link" href="#services">Découvrir nos services <span aria-hidden="true">→</span></a>
+          </div>
+          <p class="hero-contact">WhatsApp / appel&nbsp;: <a href="tel:+237674134365">+237 674 134 365</a></p>
+        </div>
+
+        <figure class="hero-media">
+          <img src="{% static 'assets/hero-care-clean.webp' %}" width="840" height="1050" alt="Une accompagnante NAKRE Care aux côtés d’une dame âgée" fetchpriority="high">
+        </figure>
+      </div>
+    </section>
+
+    <div class="context-strip" aria-label="Contextes d’accompagnement">
+      <div class="container context-items">
+        <span>À domicile</span>
+        <span aria-hidden="true">•</span>
+        <span>Milieu hospitalier</span>
+        <span aria-hidden="true">•</span>
+        <span>Rendez-vous</span>
+        <span aria-hidden="true">•</span>
+        <span>Yaoundé</span>
+      </div>
+    </div>
+
+    <section class="section audience" aria-labelledby="audience-title">
+      <div class="container two-column editorial-grid">
+        <div>
+          <p class="eyebrow">À qui s’adresse NAKRE Care&nbsp;?</p>
+          <h2 id="audience-title">Un accompagnement pensé autour de la personne et de sa famille.</h2>
+        </div>
+        <div class="audience-copy">
+          <p>Nos services peuvent notamment répondre aux besoins des personnes qui rencontrent une difficulté temporaire ou durable dans leur quotidien.</p>
+          <ul class="plain-list columns-list">
+            <li>Personnes âgées</li>
+            <li>Personnes malades</li>
+            <li>Personnes en convalescence</li>
+            <li>Personnes vivant avec un handicap</li>
+            <li>Personnes en perte d’autonomie</li>
+            <li>Familles ayant besoin d’un relais</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section services" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-heading narrow-heading">
+          <p class="eyebrow">Services</p>
+          <h2 id="services-title">Une présence adaptée aux moments où elle est nécessaire.</h2>
+          <p>Chaque accompagnement est organisé selon la situation, le lieu et les besoins définis avec la personne et sa famille.</p>
+        </div>
+
+        <div class="service-list">
+          <article class="service-row">
+            <div class="service-number" aria-hidden="true">01</div>
+            <div>
+              <h3>Accompagnement à domicile</h3>
+              <p>Une présence au domicile pour accompagner la personne dans son quotidien, dans le respect de ses habitudes et de son autonomie.</p>
+            </div>
+          </article>
+          <article class="service-row">
+            <div class="service-number" aria-hidden="true">02</div>
+            <div>
+              <h3>Accompagnement en milieu hospitalier</h3>
+              <p>Une présence humaine et rassurante auprès de la personne lorsqu’elle séjourne ou se rend dans un établissement hospitalier.</p>
+            </div>
+          </article>
+          <article class="service-row">
+            <div class="service-number" aria-hidden="true">03</div>
+            <div>
+              <h3>Rendez-vous et déplacements utiles</h3>
+              <p>Un accompagnement lors de rendez-vous ou de déplacements lorsque la personne a besoin d’être soutenue et accompagnée.</p>
+            </div>
+          </article>
+        </div>
+
+        <p class="service-note">NAKRE Care présente ici des services d’accompagnement. Les actes médicaux ou réglementés relèvent uniquement des professionnels habilités.</p>
+      </div>
+    </section>
+
+    <section class="section trust" id="apropos" aria-labelledby="trust-title">
+      <div class="container trust-layout">
+        <figure class="support-media">
+          <img src="{% static 'assets/daily-clean.webp' %}" width="900" height="1100" loading="lazy" alt="Une accompagnante NAKRE Care soutenant un homme âgé lors d’un déplacement">
+        </figure>
+
+        <div class="trust-content">
+          <p class="eyebrow">Pourquoi NAKRE Care&nbsp;?</p>
+          <h2 id="trust-title">Un accompagnement organisé, respectueux et humain.</h2>
+          <p class="intro">L’objectif est simple&nbsp;: apporter un relais clair aux familles tout en respectant la dignité, les habitudes et le rythme de la personne accompagnée.</p>
+
+          <dl class="commitments">
+            <div><dt>Dignité</dt><dd>Respecter la personne dans sa manière de vivre et dans les décisions qui la concernent.</dd></div>
+            <div><dt>Bienveillance</dt><dd>Adopter une présence attentive, respectueuse et adaptée à la situation.</dd></div>
+            <div><dt>Accompagnement personnalisé</dt><dd>Définir le cadre de l’accompagnement à partir des besoins réellement exprimés.</dd></div>
+            <div><dt>Communication claire</dt><dd>Partager les informations utiles avec la famille et préciser le rôle de chacun.</dd></div>
+            <div><dt>Confidentialité</dt><dd>Traiter les informations personnelles et familiales avec discrétion.</dd></div>
+            <div><dt>Organisation</dt><dd>Préparer les interventions et ajuster le suivi lorsque la situation évolue.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process" id="fonctionnement" aria-labelledby="process-title">
+      <div class="container process-layout">
+        <div class="process-heading">
+          <p class="eyebrow">Comment ça marche</p>
+          <h2 id="process-title">Quatre étapes pour organiser l’accompagnement.</h2>
+          <p>Vous gardez un cadre simple et compréhensible, du premier échange jusqu’au suivi.</p>
+        </div>
+
+        <ol class="timeline">
+          <li>
+            <span class="timeline-number">1</span>
+            <div><h3>Prise de contact</h3><p>Vous présentez votre besoin par téléphone ou WhatsApp.</p></div>
+          </li>
+          <li>
+            <span class="timeline-number">2</span>
+            <div><h3>Évaluation</h3><p>Nous précisons la situation, le lieu, la fréquence et les attentes.</p></div>
+          </li>
+          <li>
+            <span class="timeline-number">3</span>
+            <div><h3>Organisation</h3><p>Le cadre de l’accompagnement est défini de manière claire avec la famille.</p></div>
+          </li>
+          <li>
+            <span class="timeline-number">4</span>
+            <div><h3>Suivi</h3><p>Les informations utiles sont transmises et l’organisation peut être ajustée si nécessaire.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <div class="faq-heading">
+          <p class="eyebrow">Questions fréquentes</p>
+          <h2 id="faq-title">Les réponses essentielles avant de nous contacter.</h2>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>À qui s’adressent les services de NAKRE Care&nbsp;?</summary>
+            <p>Ils peuvent concerner les personnes âgées, malades, en convalescence, vivant avec un handicap ou en perte d’autonomie, ainsi que leurs familles.</p>
+          </details>
+          <details>
+            <summary>Dans quels contextes intervenez-vous&nbsp;?</summary>
+            <p>NAKRE Care propose un accompagnement à domicile, en milieu hospitalier et lors de rendez-vous ou déplacements utiles, selon l’organisation définie avec la famille.</p>
+          </details>
+          <details>
+            <summary>Comment se met en place un accompagnement&nbsp;?</summary>
+            <p>Le premier échange permet de préciser le besoin, puis d’organiser le cadre de l’intervention et le suivi.</p>
+          </details>
+          <details>
+            <summary>NAKRE Care réalise-t-il des actes médicaux&nbsp;?</summary>
+            <p>Les actes médicaux ou réglementés ne sont pas présentés comme des prestations de NAKRE Care et relèvent des professionnels habilités.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div class="contact-intro">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title">Parlons simplement de votre besoin.</h2>
+          <p>Pour un premier échange, WhatsApp est le moyen le plus direct. Vous pouvez aussi nous appeler pour un premier échange.</p>
+
+          <div class="contact-priority">
+            <a class="button button-primary" href="{{ whatsapp_url }}?text=Bonjour%20NAKRE%20Care%2C%20je%20souhaite%20vous%20pr%C3%A9senter%20mon%20besoin." target="_blank" rel="noopener noreferrer">Écrire sur WhatsApp</a>
+            <a class="phone-link" href="tel:+237674134365">Appeler le +237 674 134 365</a>
+          </div>
+
+          <div class="contact-meta">
+            <p><strong>Zone de service</strong><br>Yaoundé, Cameroun</p>
+            <p><strong>Facebook</strong><br>NAKRE CARE</p>
+          </div>
+        </div>
+
+        <div class="contact-form" role="region" aria-label="Prendre contact">
+<h3>Contactez NAKRE Care</h3><p>Appelez-nous ou ouvrez une conversation WhatsApp pour un premier échange. Ne transmettez pas de renseignements médicaux par message.</p>
+<a class="button button-primary" href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer">Contacter sur WhatsApp</a>
+</div>
+      </div>
+    </section>
+
+    <section class="recruitment-brief" id="recrutement" aria-labelledby="recruit-title">
+      <div class="container recruitment-inner">
+        <div>
+          <p class="eyebrow">Recrutement</p>
+          <h2 id="recruit-title">Vous souhaitez rejoindre NAKRE Care&nbsp;?</h2>
+          <p>Découvrez le profil recherché et le processus de candidature.</p>
+        </div>
+        <a class="text-link strong-link" href="{% url 'recruitment' %}">Voir les informations de recrutement <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+  <a class="whatsapp-float" data-whatsapp-float href="{{ whatsapp_url }}?text=Bonjour%20NAKRE%20Care" target="_blank" rel="noopener noreferrer" aria-label="Contacter NAKRE Care sur WhatsApp">
+    <span aria-hidden="true">WA</span>
+  </a>{% endblock %}
