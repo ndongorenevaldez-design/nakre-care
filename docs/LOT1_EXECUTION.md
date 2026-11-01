@@ -86,3 +86,7 @@ gh pr create --draft --repo ndongorenevaldez-design/nakre-care --base docs/valid
 Aucun merge automatique. Corps de PR proposé dans `docs/LOT1_PR.md`.
 
 Arrêt après Lot 1 : attendre autorisation avant modèles patients, permissions métier/MFA fonctionnel, collecte, notifications ou provisionnement Railway.
+
+### Mise à jour lors de la préparation du Lot 2
+
+Le 1 novembre 2026, le commit local `e064ec1` a été vérifié avec arbre propre puis publié sur `origin/feat/django-foundation-lot1`. La tentative de draft PR a échoué (`Post https://api.github.com/graphql: Forbidden`). La branche distante préserve désormais le travail ; aucune PR ni fusion n’est revendiquée. Le paragraphe antérieur décrivant une branche seulement locale correspond à la clôture du Lot 1, avant cette publication.
