@@ -26,7 +26,7 @@ Le dépôt GitHub reste unique ; Codex Cloud est l'outil de développement. Ne p
 | Recrutement mobile | Navigation à réexaminer, notamment les contrôles mobiles. | Mutualiser l'en-tête Django et tester le responsive. |
 | Design | Tokens CSS et logo locaux, photographies WebP optimisées, palette officielle présente dans `assets`. | Réutiliser les assets sans réinventer l'identité. |
 | Déploiement | Le site actuel est statique sur `https://nakre-care.vercel.app/`. Aucun projet Django/Railway versionné. | Tester Railway sur une URL distincte, sans toucher à la production. |
-| Documentation récente | Quatre fichiers `docs/*.md` existent dans une branche documentaire ; aucune Pull Request signalée lors du contrôle. | Les harmoniser avec les décisions Django/Railway, sans perdre les constats d'audit. |
+| Documentation récente | Cinq documents existent sur `docs/django-railway-fullstack-20261101` ; la référence Git de la PR #1 correspond à son commit `a2f760b`. Métadonnées API non accessibles lors de la présente revue. | Ils ne sont pas fusionnés dans main au contrôle ; voir le rapport complémentaire de validation. |
 
 L'audit de la branche précédente est historique : ses recommandations Vercel Functions/Supabase sont désormais **supplantées** par ce document. Les réglages réels de Vercel, de Railway et d'un éventuel fournisseur de messagerie devront être contrôlés dans leurs tableaux de bord ; leur présence ne se déduit pas du code.
 
@@ -98,7 +98,7 @@ Séparer :
 
 Paramétrer `DEBUG=False`, `ALLOWED_HOSTS` sur l'hôte Railway réellement attribué, `CSRF_TRUSTED_ORIGINS` correctement ciblé, gestion sûre du proxy HTTPS, cookies Secure/HttpOnly/SameSite, politique de sécurité, contrôle d'accès, sauvegardes et restauration. Ne pas ajouter de wildcard large par commodité. Prévoir vérification des requêtes proxifiées et des en-têtes de sécurité.
 
-**Crédits Railway :** le domaine fourni ne coûte pas de nom de domaine, mais les ressources Django + PostgreSQL consomment du crédit. Au 1 novembre 2026, la documentation Railway indique un essai pouvant inclure jusqu'à 5 USD sur 30 jours et un plan Free avec 1 USD de crédit mensuel ; consulter les conditions et l'état du compte avant tout engagement. La production 24/7 n'est pas garantie par cette hypothèse budgétaire. Ne jamais annoncer une facture nulle certaine.
+**Crédits Railway :** le domaine fourni ne coûte pas de nom de domaine, mais les ressources Django + PostgreSQL consomment du crédit. La révision précédente mentionnait un essai pouvant inclure jusqu'à 5 USD sur 30 jours et un plan Free avec 1 USD de crédit mensuel ; ces chiffres ne sont pas vérifiés dans cette revue, ni acquis pour ce compte. Consulter les tarifs actuels, les conditions et le solde réel avant tout engagement. La production 24/7 n'est pas garantie par cette hypothèse budgétaire. Ne jamais annoncer une facture nulle certaine.
 
 Références : https://docs.railway.com/networking/domains/working-with-domains ; https://docs.railway.com/pricing/plans ; https://docs.railway.com/pricing/free-trial ; https://docs.railway.com/networking/public-networking .
 
@@ -128,3 +128,5 @@ Ne jamais envoyer d'informations de santé dans des liens WhatsApp, journaux, pa
 - sauvegardes, rétention, continuité d'activité et validation de production.
 
 **Cette révision modifie uniquement le cadrage ; aucun déploiement, création de base ou mise en service n'est autorisé.**
+
+Complément de conception, schéma détaillé, permissions/MFA et réserves vérifiées : [rapport de validation Django/Railway](VALIDATION_DJANGO_RAILWAY.md).
